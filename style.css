@@ -1,0 +1,74 @@
+:root{
+ --header: 'Fredericka the Great', cursive;
+ --p: 'Sacramento', cursive;
+ --white: #F8EDEB;
+ --peach:  #FEC89A;
+ --lightpeach: #F9DCC4;
+ --pink: #FCD5CE;
+}
+
+body {
+    background-image: url("flower1.jpg");
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+.jumbotron {
+    background-color: var(--peach);
+    color: var(--white);
+}
+
+.display-4{
+    font-family: var(--header);
+    z-index: 1;
+}
+
+#date {
+ font-family: var(--header);
+    font-size: 20px;
+}
+
+.lead {
+    font-family: var(--p);
+    font-size: 30px;
+}
+
+.schedule-block {
+    margin: 20px;
+}
+
+.block {
+display: flex;
+flex-direction: row;
+padding: 10px
+}
+
+.time-day {
+display: flex;
+justify-content: flex-end;
+font-family: var(--header);
+flex-grow: .5;
+}
+
+input {
+flex-grow: 3;
+border: none;
+background-color: var(--lightpeach) ;
+padding: 20px;
+}
+
+.save{
+    flex-grow: .5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--peach);
+    border: none;
+    transition: all .2s ease-in-out;
+}
+
+.save:hover {
+    transform: scale(1.1);
+    background-color: var(--pink);
+    border: 3px solid var(--peach);
+}
