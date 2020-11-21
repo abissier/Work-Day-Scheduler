@@ -1,7 +1,8 @@
+//main clock to display time and day
 var today = moment();
 $("#date").text(today.format("LLLL"));
 
-//create variable called currenthour that we can use to compare to time blocks 
+//create variable called currenthour that we can use to compare w time blocks 
 var currentHour = moment().format("H");
 
 // grab HTML data attr to compare to current hour
@@ -20,66 +21,48 @@ function compareTime(currentHour, calendarHourTime) {
 
     //grab time from currentHour obj 
     calendarHourTime = calendarHourObj._d;
-
-    //grab first todo9 id and datatime9 data attr to iterate through for loop
-    var todo9 = document.querySelectorAll("#todo9");
     
-
     //for loop to run through data attrbutes to compare time and add classes to todo ids
-    for (var i = 9; i < 17; i++) {
+    for (var i = 9; i < 18; i++) {
+
+        //create variables that will update when looped through
         var todo = document.querySelectorAll("#todo" + i);
         var dataTime = document.querySelectorAll("div[data-time='" + i + "']");
+
+        //grab the hour and minutes from moment obj
         var momentCompare = (moment(momentObjTime));
         var momentCompare2 = momentCompare._d;
-        var momentCompare3 = momentCompare2.toString().substr(15,3);
-
-    
-console.log(momentCompare3);
+        var momentCompare3 = momentCompare2.toString().substr(15,6);
 
         //compare hours and add classes to change background colors
-        if (moment(momentObjTime).isBefore(dataTime[0].outerText)) {
-            todo[0].classList.add("before");
-        } else if (moment(momentObjTime).isAfter(dataTime[0].outerText)) {
+        if (momentCompare3 < (dataTime[0].outerText)) {
             todo[0].classList.add("after");
+        } else if (momentCompare3 > (dataTime[0].outerText)) {
+            todo[0].classList.add("before");
         } else {
             todo[0].classList.add("same");
         }
     }
-}
+};
 
 //call function 
 compareTime();
 
 
-
-
-
-// var nineAMEl = $('input[name="todo"]');
-
-// //create save button w event listner
-
-// $(document).on("click", ".save", saveInput);
+//create save button w event listner
+$(document).on("click", ".save", saveInput);
 
 // //function that saves user text input when save button is clicked
-// function saveInput(event) {
+function saveInput(event) {
 
-//     // Prevent the default behavior
-//     event.preventDefault();
-//     console.log(nineAMEl.val());
-// }
+    // Prevent the default behavior
+    event.preventDefault();
+    //create variable for the item
+    var todoItem = $('input[name="todo"]').val();
+    console.log(todoItem);
+}
 
-
-// ex: var listEl = document.querySelector("#grocery-list");
-// var shoppingCartEl = document.querySelector("#shopping-cart");
-// var groceries = ["Bananas", "Apples", "Oranges", "Grapes", "Blueberries"];
-
-// listEl.addEventListener("click", function(event) {
-//   event.preventDefault();
-//   if(event.target.matches("button")) {
-//     var item = document.createElement("div");
-//     item.textContent = groceries[event.target.parentElement.id];
-//     shoppingCartEl.append(item);
-//   }
-// });
+//call function
+saveInput();
 
 
