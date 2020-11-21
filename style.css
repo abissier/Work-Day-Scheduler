@@ -81,14 +81,15 @@ input {
  border: 3px solid var(--hGreen);
 }
 
-.after {
-    background-color: #a3d3add8;
+.before {
+background-color: #2F3E46;
 }
+
 
 .current {
-    background-color: #84A98C;
+background-color: #84A98C;
 }
 
-.before {
-    background-color: #2F3E46;
+.after {
+background-color: #a3d3add8;
 }

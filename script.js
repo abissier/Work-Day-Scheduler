@@ -1,62 +1,57 @@
 var today = moment();
 $("#date").text(today.format("LLLL"));
 
-//timeblock is color coded to indicate whether it is in the past, present, or future via classList?
-//query is after, is before, is same?
-
 //create variable called currenthour that we can use to compare to time blocks 
-
 var currentHour = moment().format("H");
-console.log(currentHour);
 
 // grab HTML data attr to compare to current hour
 var dataAtt = document.querySelector("#time-keeper");
-console.log(dataAtt.dataset.time);
 var timeSlot = dataAtt.dataset.time;
 
 //parse the dataattr so it can be compared
-var calendarHour = moment(timeSlot, "H");
-console.log(calendarHour);
+var calendarHourObj = moment(timeSlot, "H");
 
 //function that compares current hour w calendar hour
-function matchTime (currentHour, calendarHour) {
+function compareTime(currentHour, calendarHourTime) {
 
     //grab time from moment obj
     var momentObj = (moment(currentHour));
     var momentObjTime = momentObj._d;
-    console.log(momentObjTime);
 
     //grab time from currentHour obj 
-    var calendarHourObj = (moment(calendarHour));
-    var calendarHourObjTime = calendarHourObj._d;
-    console.log(calendarHourObjTime);
+    calendarHourTime = calendarHourObj._d;
 
-    //compare hours
-    if (moment(currentHour).isAfter(calendarHour)) {
-        console.log("success");
-    } else {
-        console.log("figure this out");
+    //grab first todo9 id and datatime9 data attr to iterate through for loop
+    var todo9 = document.querySelectorAll("#todo9");
+    
+
+    //for loop to run through data attrbutes to compare time and add classes to todo ids
+    for (var i = 9; i < 17; i++) {
+        var todo = document.querySelectorAll("#todo" + i);
+        var dataTime = document.querySelectorAll("div[data-time='" + i + "']");
+        var momentCompare = (moment(momentObjTime));
+        var momentCompare2 = momentCompare._d;
+        var momentCompare3 = momentCompare2.toString().substr(15,3);
+
+    
+console.log(momentCompare3);
+
+        //compare hours and add classes to change background colors
+        if (moment(momentObjTime).isBefore(dataTime[0].outerText)) {
+            todo[0].classList.add("before");
+        } else if (moment(momentObjTime).isAfter(dataTime[0].outerText)) {
+            todo[0].classList.add("after");
+        } else {
+            todo[0].classList.add("same");
+        }
     }
-
 }
 
 //call function 
-matchTime();
-
-    // var todo9 = document.querySelector("#todo9");
+compareTime();
 
 
-//     if(moment(currentHour).isBefore(dataAtt)) {
-//         todo9.classList.add("before");
-//     } else if (moment(hour).isAfter(dataAtt)) {
-//         // todo9.classList.add("after");
-//     } else {
-//         console.log("success")
 
-//         // todo9.classList.add("current");
-//     }
-
-// }
 
 
 // var nineAMEl = $('input[name="todo"]');
@@ -74,10 +69,17 @@ matchTime();
 // }
 
 
-// //when the page refreshes the content stays via preventDefault()
-// //local storeage?
+// ex: var listEl = document.querySelector("#grocery-list");
+// var shoppingCartEl = document.querySelector("#shopping-cart");
+// var groceries = ["Bananas", "Apples", "Oranges", "Grapes", "Blueberries"];
+
+// listEl.addEventListener("click", function(event) {
+//   event.preventDefault();
+//   if(event.target.matches("button")) {
+//     var item = document.createElement("div");
+//     item.textContent = groceries[event.target.parentElement.id];
+//     shoppingCartEl.append(item);
+//   }
+// });
 
 
-// for loop that went through id data attribute compare that  hour from current 
-// moment for current time w current hour
-// compare to the hour 
