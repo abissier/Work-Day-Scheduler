@@ -6,4 +6,5 @@ When the page loads it will check local storage to see if there are any existing
 Deployed link: https://abissier.github.io/Work-Day-Scheduler/
 
 Screen Capture 
+<br>
 <a href="https://ibb.co/z8WbzDP"><img src="https://i.ibb.co/dbs6Rxk/screencapture-file-C-Users-17046-Work-Day-Scheduler-index-html-2020-11-21-18-15-47.png" alt="screencapture-file-C-Users-17046-Work-Day-Scheduler-index-html-2020-11-21-18-15-47" border="0"></a>
