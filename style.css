@@ -93,3 +93,7 @@ background-color: #84A98C;
 .after {
 background-color: #a3d3add8;
 }
+
+.noclick {
+    pointer-events: none;
+}

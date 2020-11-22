@@ -2,6 +2,8 @@
 var today = moment();
 $("#date").text(today.format("LLLL"));
 
+getTodoFromLocalStorage()
+
 //create variable called currenthour that we can use to compare w time blocks 
 var currentHour = moment().format("H");
 
@@ -21,7 +23,7 @@ function compareTime(currentHour, calendarHourTime) {
 
     //grab time from currentHour obj 
     calendarHourTime = calendarHourObj._d;
-    
+
     //for loop to run through data attrbutes to compare time and add classes to todo ids
     for (var i = 9; i < 18; i++) {
 
@@ -32,13 +34,19 @@ function compareTime(currentHour, calendarHourTime) {
         //grab the hour and minutes from moment obj
         var momentCompare = (moment(momentObjTime));
         var momentCompare2 = momentCompare._d;
-        var momentCompare3 = momentCompare2.toString().substr(15,6);
+        var momentCompare3 = momentCompare2.toString().substr(16, 2);
+        var newCalenTime = dataTime[0].outerText.substr(0, 2);
+
+        if (newCalenTime.includes(':')) {
+            newCalenTime = newCalenTime.slice(0, 1).padStart(2, '0');
+        }
 
         //compare hours and add classes to change background colors
-        if (momentCompare3 < (dataTime[0].outerText)) {
-            todo[0].classList.add("after");
-        } else if (momentCompare3 > (dataTime[0].outerText)) {
+
+        if (momentCompare3 < newCalenTime) {
             todo[0].classList.add("before");
+        } else if (momentCompare3 > newCalenTime) {
+            todo[0].classList.add("after");
         } else {
             todo[0].classList.add("same");
         }
@@ -48,21 +56,33 @@ function compareTime(currentHour, calendarHourTime) {
 //call function 
 compareTime();
 
+//grab save button from html
+var saveButton = document.querySelectorAll(".btn-success");
 
-//create save button w event listner
-$(document).on("click", ".save", saveInput);
+//for loop
+for (var i = 0; i < saveButton.length; i++) {
 
-// //function that saves user text input when save button is clicked
-function saveInput(event) {
+    // //create save button event listner 
+    saveButton[i].addEventListener("click", function (event) {
+        event.preventDefault();
+      
+        var text= event.target.id
+        var text2 = document.getElementById("todo" + text +"")
+        var text3= text2.value;
 
-    // Prevent the default behavior
-    event.preventDefault();
-    //create variable for the item
-    var todoItem = $('input[name="todo"]').val();
-    console.log(todoItem);
+        localStorage.setItem("todo" + text, text3);
+        console.log(text3)
+        console.log(text2)
+    });
 }
 
-//call function
-saveInput();
+function getTodoFromLocalStorage(){
 
+    for (var i = 9; i < 17; i++){
+        var displayTodo = localStorage.getItem("todo" + i)
+        if (displayTodo) {
+           document.getElementById("todo" + i +"").value = displayTodo;
+        }
+    }
+}
 
